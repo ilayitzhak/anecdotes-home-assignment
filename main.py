@@ -1,10 +1,10 @@
-from dummy_api import DummyApi
+from dummy_api import DummyJsonEvidenceCollectionPlugin
 
 USERNAME = "emilys"
 PASSWORD = "emilyspass"
 
 def main():
-    plugin = DummyApi(USERNAME, PASSWORD)
+    plugin = DummyJsonEvidenceCollectionPlugin(USERNAME, PASSWORD)
     plugin.run()
 
     # Test

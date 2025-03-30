@@ -1,6 +1,9 @@
 from abc import abstractmethod
 
-class Plugin:
+from plugin import Plugin
+
+
+class EvidenceCollectionPlugin(Plugin):
     @abstractmethod
     def connectivity_test(self):
         pass

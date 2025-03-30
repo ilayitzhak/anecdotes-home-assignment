@@ -1,19 +1,22 @@
 import requests
 import logging
-from base_plugin import Plugin
+from base_plugin import EvidenceCollectionPlugin
 
 BASE_URL = "https://dummyjson.com"
 LOGIN_URL = f"{BASE_URL}/auth/login"
 USER_DETAILS_URL = f"{BASE_URL}/auth/me"
 POSTS_URL = f"{BASE_URL}/posts"
 POST_COMMENTS_URL = POSTS_URL + "/{post_id}/comments"
+# "Test: {} {}".format(123, 321)
+# "Test: {0} {1}".format(123, 321)
+# "Test: {a} {b}".format(a=123, b=321)
 
 NUM_OF_POSTS = 60
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("logger")
 
-class DummyApi(Plugin):
+class DummyJsonEvidenceCollectionPlugin(EvidenceCollectionPlugin):
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -85,7 +88,7 @@ class DummyApi(Plugin):
                 raise Exception("Failed to collect posts.")
             all_posts_with_comments = []
             for post in all_posts:
-                post_id = post.get("id")
+                post_id = post.get("id") # post_id = post["id"]
                 response = requests.get(url=POST_COMMENTS_URL.format(post_id=post_id), headers=self.headers)
                 if response.status_code == 200:
                     logger.info(f"Comments collected successfully for post {post_id}.")
